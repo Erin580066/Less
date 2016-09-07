@@ -1,0 +1,57 @@
+@green:green;
+@basie:white;
+header,footer{
+    background:@green;
+    h1{
+       color:@basie; 
+    }
+}
+//作为选择器和属性名的变量
+@kuan:width;
+.@{kuan}{
+    @{kuan}:150px
+}
+//作为URL的变量
+@imgurl:"https://www.baidu.com/img/";
+header{
+    background:@green url("@{imgurl}bdlogo.png");
+    height:500px;
+}
+//带参数的混合
+.border(@color){
+    border:1px solid @color;
+}
+h1{
+    &:hover{
+       .border(#000) 
+    }
+}
+//带参数并有默认值得混合
+.border_you(@color:red){
+     border:1px solid @color;
+}
+h1{
+    &:hover{
+        .border_you();
+    }
+    
+}
+//带多个参数的混合
+//.mixin(@color:@padding:xxx;@margin:2){
+//  color-3:@color;
+//  padding-3:@padding;
+//  margin:@margin @margin @margin @margin;
+//}
+//.div2{
+//  .mixin(red;)
+//}
+//混合的返回值
+.average(@x,@y){
+    @average:((@x+@y)/2);
+    @he:@x+@y;
+}
+div{
+    .average(16px,50px);
+    padding:@average;
+    margin:@he;
+}
