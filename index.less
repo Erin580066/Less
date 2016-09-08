@@ -55,3 +55,104 @@ div{
     padding:@average;
     margin:@he;
 }
+p,a,ul,li{
+    border:2px solid #000;
+    &{
+        border-top:2px;
+    }
+}
+p,a,ul,li{
+    border:2px solid #000;
+    & & &{
+        border-top:2px;
+    }
+}
+//循环
+//.loop(@counter) when (@counter >1){
+//  .loop((@counter - 1));
+//  width:(@counter * 10px);
+//}
+//div{
+//  .loop(5);
+//}
+//循环
+//.loop(@counter) when (@counter >0){
+//  h@{counter}{
+//      padding:(10px * @counter);
+//  }
+//  .loop((@counter - 1));
+//}
+//div{
+//  .loop(6);
+//}
+.loop(@counter) when (@counter < 7){
+    h@{counter}{
+        padding:(10px * @counter);
+    }
+    .loop((@counter + 1));
+}
+.box3{
+    .loop(1);
+}
+//合并属性合并完是是以，隔开
+.mixin(){
+    box-shadow+:inset 0 0 10px red ;
+}
+.myclass{
+    .mixin();
+    box-shadow+:0 0 20px #000 ;
+}
+//合并属性 合并完是以空格分开
+.a(){
+    background+_:red;
+    background+_:url(../img/1.jpg);
+    background+_:no-repeat;
+}
+.myclass{
+    .a();
+}
+//函数库
+//color函数
+body{background:color("red");}
+//字符串函数
+div{
+//  font-family:%("%a %a","Microsoft","YaHei");
+    font-family:%("%A %a","Microsoft","YaHei");
+    @list:"a","b","c","d";
+    n:extract(@list,1);
+//  width:ceil(2.99999px)//向上取整
+//  height:floor(2.99999px)//向下取整
+//  width:2.99999px;
+//  width:percentage(0.5px);//转换成百分比
+
+    width:5.5px;
+    width:round(5.5px);
+    width:5.4px;
+    width:round(5.4px);//四舍五入取整
+    
+    width:sqrt(8px);//平方根
+    top:-999px;
+    top:abs(-999px);//绝对值
+    height:pow(2px,2);//乘方
+    height:pow(3px,3);
+    bottom:mod(5px,2);//取余
+    width:pi();//pi函数
+    width:min(3px 2px 1px);
+}
+//是否是数字类型
+//.m(@x) when (isnumber(@x)){
+//  x:@x;
+//}
+//是否是字符串类型
+//.m(@x) when (isstring(@x)){
+//  x:@x;
+//}
+.m(@x) when (isunit(@x,em)){
+    x:@x;
+}
+div{
+// .m(123); 
+// .m("abc");
+.m(220px);
+.m(220em);
+}
